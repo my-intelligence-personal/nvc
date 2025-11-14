@@ -1,0 +1,246 @@
+.plans {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plans-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.plans-heading {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-inverse);
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.plans-heading em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.plans-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.plan-card {
+  border-radius: 24px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.plan-card.highlighted {
+  border: 2px solid var(--accent-primary);
+}
+
+.plan-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.plan-dream {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.plan-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.plan-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.plan-price {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.plan-amount {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.plan-period {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.plan-features {
+  list-style: none;
+  flex: 1;
+}
+
+.plan-feature {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.plan-feature:last-child {
+  margin-bottom: 0;
+}
+
+.plan-check {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.shared-features {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.shared-features-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: var(--text-inverse);
+  margin-bottom: 2rem;
+}
+
+.shared-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.shared-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.shared-feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.shared-feature-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.plans-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cta-primary-large {
+  background: var(--accent-primary);
+  color: var(--navy-800);
+  border: none;
+  padding: 1.25rem 3rem;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-primary-large:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cta-secondary-large {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0;
+}
+
+.cta-secondary-large:hover {
+  color: var(--text-inverse);
+}
+
+@media (max-width: 1024px) {
+  .plans-cards {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .shared-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .plans {
+    padding: 2rem 1.5rem;
+  }
+
+  .plans-heading {
+    margin-bottom: 2rem;
+  }
+
+  .plans-cards {
+    margin-bottom: 3rem;
+  }
+
+  .plan-card {
+    padding: 2rem;
+  }
+
+  .shared-features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .cta-primary-large {
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+}
+

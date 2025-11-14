@@ -1,0 +1,58 @@
+:root {
+  /* Core palette */
+  --navy-900: #19202f;  /* very dark navy (background) */
+  --navy-800: #1e2945;  /* deep navy */
+  --navy-600: #2f3e6a;  /* main navy for cards, text blocks */
+  --blue-300: #88a9da;  /* soft sky blue */
+  --blue-100: #d4ddef;  /* pale blue, backgrounds/cards */
+  --cream-100: #fff7b5; /* soft yellow/cream accent */
+
+  /* Semantic roles */
+  --bg-dark: var(--navy-900);
+  --bg-light: #ffffff;
+  --bg-soft: var(--blue-100);
+
+  --text-main: #0b0f17;
+  --text-inverse: #ffffff;
+  --text-muted: #d4ddef;
+  --text-accent: var(--blue-300);
+
+  --accent-primary: var(--cream-100);
+  --accent-secondary: var(--blue-300);
+
+  --card-border: var(--blue-100);
+  --card-highlight: var(--cream-100);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

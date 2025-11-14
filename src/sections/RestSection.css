@@ -1,0 +1,120 @@
+.rest-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.rest-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-600) 100%);
+  background-image: url('/assets/rest-mother-child.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rest-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(30, 41, 69, 0.8) 0%, rgba(30, 41, 69, 0.4) 50%, rgba(30, 41, 69, 0.1) 100%);
+}
+
+.rest-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 4rem;
+  min-height: 100vh;
+}
+
+.rest-question {
+  max-width: 700px;
+  transition: opacity 0.3s ease;
+}
+
+.rest-heading {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-inverse);
+  margin-bottom: 3rem;
+}
+
+.rest-heading em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.rest-solution {
+  max-width: 600px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.rest-subheading {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-inverse);
+  margin-bottom: 2rem;
+}
+
+.rest-body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.rest-body p {
+  margin-bottom: 1.5rem;
+}
+
+.rest-body p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  .rest-content {
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .rest-section {
+    padding: 1.5rem;
+  }
+
+  .rest-content {
+    padding-right: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .rest-question,
+  .rest-solution {
+    max-width: 100%;
+  }
+
+  .rest-heading {
+    margin-bottom: 2rem;
+  }
+}
+
