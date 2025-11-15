@@ -32,10 +32,14 @@ function HeroProblem() {
       <div className="hero-content">
         <div className="hero-text" ref={textRef}>
           <h1 className="hero-heading">
-            What keeps them <em>entertained</em>
+            <span>What keeps them <em>entertained</em>,</span>
             <br />
-            keeps them <em>awake</em>.
+            <span>keeps them <em>awake</em>.</span>
           </h1>
+          <div className="hero-body">
+            <p>What seems like quiet screen time before sleep is quietly reshaping how children rest, think, and grow.</p>
+            <p>Blue light delays sleep, overstimulation blocks calm, and the screen has replaced the story that once connected parent and child.</p>
+          </div>
         </div>
       </div>
     </section>

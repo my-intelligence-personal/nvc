@@ -69,7 +69,7 @@
 }
 
 .rest-body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'RafaleBG', sans-serif;
   font-size: clamp(1rem, 1.5vw, 1.125rem);
   line-height: 1.8;
   color: var(--text-muted);

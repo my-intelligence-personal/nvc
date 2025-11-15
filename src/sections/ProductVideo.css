@@ -12,6 +12,7 @@
   background: var(--bg-dark); /* Dark background, transitions to white */
   margin: 0;
   padding: 0;
+  padding-bottom: 20vh; /* Extra gap after "Designing Dreams" */
   width: 100vw;
   transition: background 0.3s ease;
 }

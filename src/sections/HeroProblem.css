@@ -42,10 +42,11 @@
 }
 
 .hero-text {
-  max-width: 700px;
+  max-width: 1200px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  text-align: left;
 }
 
 .hero-text.visible {
@@ -59,7 +60,8 @@
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-inverse);
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
+  white-space: pre-line;
 }
 
 .hero-heading em {
@@ -72,11 +74,19 @@
 }
 
 .hero-body {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-family: 'RafaleBG', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 2.25rem);
   line-height: 1.7;
   color: var(--text-muted);
   margin-bottom: 1rem;
+}
+
+.hero-body p {
+  margin-bottom: 3rem;
+}
+
+.hero-body p:last-child {
+  margin-bottom: 0;
 }
 
 .hero-body:last-child {

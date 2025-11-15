@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'RafaleBG';
+  src: url('/assets/Rafale BG.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Core palette */
   --navy-900: #19202f;  /* very dark navy (background) */
@@ -28,7 +36,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'DM Sans', sans-serif;
 }
 
 html {

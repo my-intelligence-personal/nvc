@@ -84,32 +84,36 @@ const Features = () => {
 
   const cards = [
     {
-      title: "Choose Your Adventure Together",
-      image: "/assets/yume-options.jpg"
-    },
-    {
-      title: "Stories That Come to Life",
-      image: "/assets/yume-story.jpg"
-    },
-    {
-      title: "The Perfect Ending Every Time",
-      image: "/assets/yume-ending.jpg"
-    },
-    {
-      title: "Stories That Fit Your Rhythm",
-      image: "/assets/story-length.jpg"
-    },
-    {
-      title: "Perfectly Tell Your Tales",
-      image: "/assets/age-group.jpg"
-    },
-    {
-      title: "Sleep Friendly",
+      title: "Blue-Light Filter",
       image: "/assets/black-and-white.jpg"
     },
     {
-      title: "Sweet Dreams Awake",
+      title: "Universal Compatibility",
       image: "/assets/available-everywhere.jpg"
+    },
+    {
+      title: "Co-Creation and Choice",
+      image: "/assets/yume-options.jpg"
+    },
+    {
+      title: "AI-Generated Pictures",
+      image: "/assets/yume-story.jpg"
+    },
+    {
+      title: "Preserving Connection",
+      image: "/assets/father-daughter-using-yume.jpg"
+    },
+    {
+      title: "Adaptive Story Length",
+      image: "/assets/story-length.jpg"
+    },
+    {
+      title: "End of Story Button",
+      image: "/assets/yume-ending.jpg"
+    },
+    {
+      title: "White Noise",
+      image: "/assets/yume-ending.jpg"
     }
   ];
 
@@ -122,7 +126,7 @@ const Features = () => {
           </div>
           <div className="features-cards">
             {cards.map((card, index) => (
-              <div key={index} className={`feature-card ${index === 3 || index === 4 ? 'feature-card-zoom-25' : ''}`}>
+              <div key={index} className="feature-card">
                 <div className="feature-card-image">
                   <img src={card.image} alt={card.title} />
                 </div>

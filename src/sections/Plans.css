@@ -80,6 +80,10 @@
   opacity: 0.9;
 }
 
+.plan-subtitle-single-line {
+  margin-bottom: 3rem;
+}
+
 .plan-price {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
