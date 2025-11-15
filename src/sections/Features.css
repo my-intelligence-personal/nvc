@@ -13,6 +13,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .features-motion-container {
@@ -20,12 +21,16 @@
   align-items: center;
   /* This container will be translated horizontally */
   will-change: transform;
-  /* Add padding to the left to position the title correctly */
-  padding-left: calc((100vw - 1100px) / 2); /* Center align with other content */
+  width: 100%;
+  position: relative;
 }
 
 .features-header {
-  margin-right: 10vw; /* Create a large gap between title and cards */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none; /* Allow clicks to pass through */
 }
 
 .features-title {
@@ -39,6 +44,8 @@
 .features-cards {
   display: flex;
   gap: 2rem; /* 32px */
+  /* Position cards completely off-screen to the right initially */
+  margin-left: 100vw; /* Start with all cards hidden off-screen */
 }
 
 .feature-card {
@@ -67,6 +74,10 @@
 
 .feature-card-zoom .feature-card-image img {
   transform: scale(1.5);
+}
+
+.feature-card-zoom-25 .feature-card-image img {
+  transform: scale(1.25);
 }
 
 .feature-card-title {

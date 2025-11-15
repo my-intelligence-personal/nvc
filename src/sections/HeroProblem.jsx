@@ -36,12 +36,6 @@ function HeroProblem() {
             <br />
             keeps them <em>awake</em>.
           </h1>
-          <p className="hero-body">
-            What seems like quiet screen time before sleep is quietly reshaping how children rest, think, and grow.
-          </p>
-          <p className="hero-body">
-            Blue light delays sleep, overstimulation blocks calm, and the screen has replaced the story that once connected parent and child.
-          </p>
         </div>
       </div>
     </section>

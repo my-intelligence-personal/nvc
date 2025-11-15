@@ -1,6 +1,14 @@
+@font-face {
+  font-family: 'Amsterdam Two';
+  src: url('/assets/amsterdam-two-ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .product-video {
   position: relative;
-  min-height: 500vh; /* Taller section to accommodate all phases */
+  min-height: 300vh; /* Shorter section for faster completion */
   background: var(--bg-dark); /* Dark background, transitions to white */
   margin: 0;
   padding: 0;
@@ -45,7 +53,7 @@
   transition: opacity 0.3s ease;
 }
 
-.yume-text {
+.logo-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -53,12 +61,50 @@
   z-index: 10;
   text-align: center;
   pointer-events: none;
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(4rem, 8vw, 8rem);
-  font-weight: 700;
+  transition: opacity 0.3s ease;
+}
+
+.yume-text {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(21rem, 42vw, 35rem);
+  font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--navy-800);
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+}
+
+.tagline-text {
+  font-family: 'Amsterdam Two', cursive, 'Dancing Script', cursive;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: normal;
+  color: var(--navy-800);
+  line-height: 1.4;
+  min-height: 1.4em;
   transition: opacity 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  color: var(--navy-800);
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
 }
 
 .product-video-element {
@@ -92,12 +138,19 @@
 
 @media (max-width: 768px) {
   .product-video {
-    min-height: 500vh;
+    min-height: 300vh;
   }
 
-  .introducing-text,
-  .yume-text {
+  .introducing-text {
     font-size: clamp(3rem, 10vw, 6rem);
+  }
+
+  .yume-text {
+    font-size: clamp(15.75rem, 35vw, 26.25rem);
+  }
+
+  .tagline-text {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
   }
 
   .product-video-copy {

@@ -22,10 +22,18 @@ const Features = () => {
       const { top, height } = section.getBoundingClientRect();
       const scrollableHeight = height - window.innerHeight;
 
-      // --- CHANGE IS HERE ---
-      const cardWidth = 400; // Defined in Features.css
-      // Calculate maxScroll to end with the last card centered
-      const maxScroll = motionContainer.scrollWidth - window.innerWidth + (window.innerWidth / 2) - (cardWidth / 2);
+      // Cards start completely off-screen to the right (at 100vw)
+      // As we scroll, they move left and come into view
+      const initialOffset = window.innerWidth; // Cards start completely off-screen
+      
+      // Calculate how far left the cards should move
+      // Total width of all cards container
+      const cardsContainerWidth = motionContainer.scrollWidth;
+      // We need to scroll left enough to reveal all cards
+      // Start: cards at 100vw (completely hidden)
+      // End: scroll left enough to show all cards
+      // The translateX moves the container left, so we need to move by initialOffset + enough to show all cards
+      const maxScroll = initialOffset + cardsContainerWidth - window.innerWidth;
 
       let newTargetScroll = 0;
       if (top < 0 && top > -scrollableHeight) {
@@ -76,19 +84,31 @@ const Features = () => {
 
   const cards = [
     {
-      title: "Sleep-friendly screen time",
-      image: "/assets/black-and-white.jpg"
+      title: "Choose Your Adventure Together",
+      image: "/assets/yume-options.jpg"
     },
     {
-      title: "Stories that fit your rhythm",
+      title: "Stories That Come to Life",
+      image: "/assets/yume-story.jpg"
+    },
+    {
+      title: "The Perfect Ending Every Time",
+      image: "/assets/yume-ending.jpg"
+    },
+    {
+      title: "Stories That Fit Your Rhythm",
       image: "/assets/story-length.jpg"
     },
     {
-      title: "Perfectly tailored tales",
+      title: "Perfectly Tell Your Tales",
       image: "/assets/age-group.jpg"
     },
     {
-      title: "Sweet dreams await",
+      title: "Sleep Friendly",
+      image: "/assets/black-and-white.jpg"
+    },
+    {
+      title: "Sweet Dreams Awake",
       image: "/assets/available-everywhere.jpg"
     }
   ];
@@ -102,7 +122,7 @@ const Features = () => {
           </div>
           <div className="features-cards">
             {cards.map((card, index) => (
-              <div key={index} className={`feature-card ${index === 1 || index === 2 ? 'feature-card-zoom' : ''}`}>
+              <div key={index} className={`feature-card ${index === 3 || index === 4 ? 'feature-card-zoom-25' : ''}`}>
                 <div className="feature-card-image">
                   <img src={card.image} alt={card.title} />
                 </div>

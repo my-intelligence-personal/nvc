@@ -36,9 +36,7 @@ function RestSection() {
 
   return (
     <section id="rest-section" className="rest-section" ref={sectionRef}>
-      <div className="rest-background">
-        <div className="rest-overlay"></div>
-      </div>
+      <div className="rest-background"></div>
       <div className="rest-content">
         <div 
           className="rest-question" 
@@ -48,23 +46,6 @@ function RestSection() {
           <h1 className="rest-heading">
             What if technology finally learned to <em>rest</em>?
           </h1>
-        </div>
-        <div 
-          className="rest-solution" 
-          ref={solutionRef}
-          style={{ 
-            opacity: solutionOpacity,
-            transform: `translateY(${solutionTranslateY}px)`
-          }}
-        >
-          <h3 className="rest-subheading">
-            The app that makes sleep healthier, stories richer, and your bond stronger.
-          </h3>
-          <div className="rest-body">
-            <p>You read, or your voice reads for them while they choose what happens next.</p>
-            <p>AI paints each scene in soft, low-light illustrations designed for sleepy eyes.</p>
-            <p>As their eyes grow heavy, Yume finishes the story with care and settles into a cloud of comforting sleep sounds.</p>
-          </div>
         </div>
       </div>
     </section>

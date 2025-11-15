@@ -26,13 +26,13 @@ function ProductVideo({ onVideoComplete }) {
 
       // Video scrubbing logic
       if (videoRef.current && videoRef.current.duration && !isNaN(videoRef.current.duration)) {
-        // Phase 4: Video scrubs (progress 0.45 to 0.80)
-        if (progress >= 0.45 && progress <= 0.80) {
-          const scrubProgress = (progress - 0.45) / (0.80 - 0.45)
+        // Phase 4: Video scrubs (progress 0.25 to 0.55) - narrower range for faster, more sensitive scrubbing
+        if (progress >= 0.25 && progress <= 0.55) {
+          const scrubProgress = (progress - 0.25) / (0.55 - 0.25)
           const videoDuration = videoRef.current.duration
           const newTime = scrubProgress * videoDuration * 0.514 // Scrub up to 51.4% of video
           videoRef.current.currentTime = newTime
-        } else if (progress < 0.45) {
+        } else if (progress < 0.25) {
           // Before scrubbing, stay at frame 0
           videoRef.current.currentTime = 0
         } else { // After scrubbing, stay at the end frame
@@ -58,42 +58,59 @@ function ProductVideo({ onVideoComplete }) {
   // --- Animation Phases based on Scroll Progress ---
 
   // Phase 1 & 2: "Introducing" text
-  // Stays fully visible until 25% progress, then fades out until 35%
-  const introducingOpacity = scrollProgress <= 0.25
+  // Stays fully visible until 15% progress, then fades out until 25%
+  const introducingOpacity = scrollProgress <= 0.15
     ? 1
-    : scrollProgress < 0.35
-    ? 1 - ((scrollProgress - 0.25) / 0.1)
+    : scrollProgress < 0.25
+    ? 1 - ((scrollProgress - 0.15) / 0.1)
     : 0
 
   // Phase 3, 4, 5: Video
-  // Fades in from 35-45%, stays visible until 80%, then fades out until 90%
-  const videoOpacity = scrollProgress < 0.35
+  // Fades in from 20-25%, stays visible until 55%, then fades out until 65%
+  const videoOpacity = scrollProgress < 0.20
     ? 0
-    : scrollProgress < 0.45
-    ? (scrollProgress - 0.35) / 0.1
-    : scrollProgress <= 0.80
+    : scrollProgress < 0.25
+    ? (scrollProgress - 0.20) / 0.05
+    : scrollProgress <= 0.55
     ? 1
-    : scrollProgress < 0.90
-    ? 1 - ((scrollProgress - 0.80) / 0.1)
+    : scrollProgress < 0.65
+    ? 1 - ((scrollProgress - 0.55) / 0.1)
     : 0
 
-  // Phase 6 & 7: "Yume" text
-  // Fades in from 80-90%, then stays visible
-  const yumeOpacity = scrollProgress < 0.80
+  // Phase 6: Whitescreen gap after video fades out
+  // Video fades out by 65%, whitescreen gap from 65-75%
+  
+  // Phase 7: "YUME" text
+  // Fades in from 75-85%, then stays visible
+  const yumeOpacity = scrollProgress < 0.75
     ? 0
-    : scrollProgress < 0.90
-    ? (scrollProgress - 0.80) / 0.1
+    : scrollProgress < 0.85
+    ? (scrollProgress - 0.75) / 0.1
     : 1
 
-  // Trigger completion callback when Yume text appears
+  // Phase 8: "Designing Dreams" typewriter animation
+  // Starts typing from 80% scroll progress to 100%
+  const taglineText = "Designing Dreams"
+  const typewriterProgress = scrollProgress < 0.80
+    ? 0
+    : scrollProgress >= 1.0
+    ? 1
+    : (scrollProgress - 0.80) / 0.20
+  
+  const revealedChars = Math.floor(typewriterProgress * taglineText.length)
+  const displayedText = taglineText.substring(0, revealedChars)
+  const taglineOpacity = typewriterProgress > 0 ? 1 : 0
+
+  // Trigger completion callback when Yume text appears (earlier now)
   useEffect(() => {
-    if (yumeOpacity > 0.5 && onVideoComplete) {
+    if (yumeOpacity > 0.3 && onVideoComplete) {
       onVideoComplete(true)
     }
   }, [yumeOpacity, onVideoComplete])
 
-  // Calculate background color - transition from dark to white when Yume appears
-  const backgroundColor = yumeOpacity > 0 
+  // Calculate background color - transition from dark to white when video fades out
+  // Background becomes white at 65% (when video is gone), stays white for whitescreen gap
+  const backgroundColor = scrollProgress >= 0.65
     ? '#ffffff' 
     : 'var(--bg-dark)'
 
@@ -128,12 +145,18 @@ function ProductVideo({ onVideoComplete }) {
             Your browser does not support the video tag.
           </video>
 
-          {/* "Yume" text */}
-          <div 
-            className="yume-text"
-            style={{ opacity: yumeOpacity }}
-          >
-            Yume
+          {/* Logo container: YUME + Designing Dreams */}
+          <div className="logo-container" style={{ opacity: yumeOpacity }}>
+            <div className="yume-text">
+              YUME
+              <div 
+                className="tagline-text"
+                style={{ opacity: taglineOpacity }}
+              >
+                {displayedText}
+                {typewriterProgress < 1 && <span className="typewriter-cursor">|</span>}
+              </div>
+            </div>
           </div>
         </div>
       </div>
