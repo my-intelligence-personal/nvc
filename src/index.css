@@ -42,7 +42,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-main);
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {

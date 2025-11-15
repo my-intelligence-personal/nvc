@@ -5,165 +5,49 @@ function ProductVideo({ onVideoComplete }) {
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
-  const lockedScrollY = useRef(0)
-  const isScrubbing = useRef(false)
-  const accumulatedScroll = useRef(0)
-  const hasFinishedScrubbing = useRef(false)
-  const [showIntroducing, setShowIntroducing] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
-    let lastScrollY = window.scrollY
-
     const handleScroll = () => {
-      if (!sectionRef.current || !videoRef.current) return
+      if (!sectionRef.current) return
 
       const rect = sectionRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
       const sectionTop = rect.top
       const sectionHeight = rect.height
-
-      // Phase 1: First 100vh - video stays at frame 0 (static)
-      // Phase 2: Next 100vh - video scrubs based on scroll
-      const staticPhaseHeight = windowHeight // First 100vh is static
-      const scrubbingPhaseHeight = sectionHeight - staticPhaseHeight // Remaining height for scrubbing
-      
-      // Calculate how much we've scrolled past the static phase
-      const scrolledPastStatic = Math.max(0, windowHeight - sectionTop - staticPhaseHeight)
-      
-      // Check if we're in scrubbing phase
-      const inScrubbingPhase = scrolledPastStatic > 0 && scrolledPastStatic < scrubbingPhaseHeight
-      const scrubProgress = Math.min(1, scrolledPastStatic / scrubbingPhaseHeight)
-      const pastScrubbingPhase = scrolledPastStatic >= scrubbingPhaseHeight
-      
-      // Reset finished flag if we scroll back before the scrubbing phase
-      if (scrolledPastStatic <= 0) {
-        hasFinishedScrubbing.current = false
-      }
-      
-      if (inScrubbingPhase && !hasFinishedScrubbing.current) {
-        // Phase 2: Lock scroll and scrub video (only if not finished)
-        if (!isScrubbing.current) {
-          isScrubbing.current = true
-          lockedScrollY.current = window.scrollY
-          accumulatedScroll.current = 0
-        }
-        
-        // Calculate scroll delta
-        const scrollDelta = window.scrollY - lockedScrollY.current
-        accumulatedScroll.current += scrollDelta
-        
-        // Convert accumulated scroll to video time
-        const videoDuration = videoRef.current.duration
-        if (videoDuration && !isNaN(videoDuration)) {
-          // Map accumulated scroll to video duration
-          // Adjust sensitivity: 100vh of scroll = full video duration
-          const scrollRatio = Math.max(0, Math.min(1, accumulatedScroll.current / scrubbingPhaseHeight))
-          const newTime = scrollRatio * videoDuration
-          videoRef.current.currentTime = newTime
-          
-          // Show "INTRODUCING" text at 80% scroll progress
-          setShowIntroducing(scrollRatio >= 0.8)
-          
-          // If video reached the end, mark as finished and unlock scroll
-          if (scrollRatio >= 1) {
-            hasFinishedScrubbing.current = true
-            isScrubbing.current = false
-            accumulatedScroll.current = scrubbingPhaseHeight // Keep at max to prevent reset
-            // Show header immediately
-            if (onVideoComplete) {
-              onVideoComplete(true)
-            }
-          }
-        }
-        
-        // Lock scroll position (only if still scrubbing)
-        if (isScrubbing.current && Math.abs(window.scrollY - lockedScrollY.current) > 1) {
-          window.scrollTo(0, lockedScrollY.current)
-        }
-      } else {
-        // Phase 1, past scrubbing, or finished scrubbing: Normal scroll
-        if (isScrubbing.current) {
-          isScrubbing.current = false
-        }
-        
-        if (scrolledPastStatic <= 0) {
-          // Phase 1: Keep video at frame 0
-          if (videoRef.current && videoRef.current.duration && !isNaN(videoRef.current.duration)) {
-            videoRef.current.currentTime = 0
-          }
-          setShowIntroducing(false)
-        } else if (pastScrubbingPhase || hasFinishedScrubbing.current) {
-          // Video finished scrubbing or past scrubbing phase, ensure it's at the end
-          if (videoRef.current && videoRef.current.duration && !isNaN(videoRef.current.duration)) {
-            videoRef.current.currentTime = videoRef.current.duration
-          }
-          setShowIntroducing(true) // Keep showing if finished
-          // Show header if video finished
-          if (hasFinishedScrubbing.current && onVideoComplete) {
-            onVideoComplete(true)
-          }
-        }
-      }
-      
-      lastScrollY = window.scrollY
-    }
-
-    const handleWheel = (e) => {
-      if (!isScrubbing.current || !videoRef.current || !sectionRef.current) return
-      
-      const rect = sectionRef.current.getBoundingClientRect()
       const windowHeight = window.innerHeight
-      const sectionTop = rect.top
-      const sectionHeight = rect.height
-      const staticPhaseHeight = windowHeight
-      const scrubbingPhaseHeight = sectionHeight - staticPhaseHeight
-      
-      // Check if we're in scrubbing phase and haven't finished
-      const scrolledPastStatic = Math.max(0, windowHeight - sectionTop - staticPhaseHeight)
-      if (scrolledPastStatic > 0 && scrolledPastStatic < scrubbingPhaseHeight && !hasFinishedScrubbing.current) {
-        e.preventDefault()
-        e.stopPropagation()
-        
-        // Convert wheel delta to accumulated scroll
-        accumulatedScroll.current += e.deltaY
-        
-        // Convert accumulated scroll to video time
-        const videoDuration = videoRef.current.duration
-        if (videoDuration && !isNaN(videoDuration)) {
-          const scrollRatio = Math.max(0, Math.min(1, accumulatedScroll.current / scrubbingPhaseHeight))
-          const newTime = scrollRatio * videoDuration
+
+      // Calculate progress from 0 to 1, starting when the section top hits the viewport top
+      // and ending when the section bottom hits the viewport bottom.
+      const scrollAmount = sectionHeight - windowHeight
+      if (scrollAmount <= 0) return
+
+      const progress = Math.max(0, Math.min(1, -sectionTop / scrollAmount))
+      setScrollProgress(progress)
+
+      // Video scrubbing logic
+      if (videoRef.current && videoRef.current.duration && !isNaN(videoRef.current.duration)) {
+        // Phase 4: Video scrubs (progress 0.45 to 0.80)
+        if (progress >= 0.45 && progress <= 0.80) {
+          const scrubProgress = (progress - 0.45) / (0.80 - 0.45)
+          const videoDuration = videoRef.current.duration
+          const newTime = scrubProgress * videoDuration * 0.514 // Scrub up to 51.4% of video
           videoRef.current.currentTime = newTime
-          
-          // Show "INTRODUCING" text at 80% scroll progress
-          setShowIntroducing(scrollRatio >= 0.8)
-          
-          // If video reached the end, mark as finished and unlock scroll
-          if (scrollRatio >= 1) {
-            hasFinishedScrubbing.current = true
-            isScrubbing.current = false
-            accumulatedScroll.current = scrubbingPhaseHeight // Keep at max
-            // Show header immediately
-            if (onVideoComplete) {
-              onVideoComplete(true)
-            }
-            return // Allow normal scroll to continue
-          }
+        } else if (progress < 0.45) {
+          // Before scrubbing, stay at frame 0
+          videoRef.current.currentTime = 0
+        } else { // After scrubbing, stay at the end frame
+          videoRef.current.currentTime = videoRef.current.duration * 0.514
         }
-        
-        // Prevent page scroll while scrubbing
-        return false
       }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('resize', handleScroll, { passive: true })
-    window.addEventListener('wheel', handleWheel, { passive: false })
     handleScroll() // Initial calculation
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
-      window.removeEventListener('wheel', handleWheel)
     }
   }, [isVideoLoaded])
 
@@ -171,28 +55,85 @@ function ProductVideo({ onVideoComplete }) {
     setIsVideoLoaded(true)
   }
 
+  // --- Animation Phases based on Scroll Progress ---
+
+  // Phase 1 & 2: "Introducing" text
+  // Stays fully visible until 25% progress, then fades out until 35%
+  const introducingOpacity = scrollProgress <= 0.25
+    ? 1
+    : scrollProgress < 0.35
+    ? 1 - ((scrollProgress - 0.25) / 0.1)
+    : 0
+
+  // Phase 3, 4, 5: Video
+  // Fades in from 35-45%, stays visible until 80%, then fades out until 90%
+  const videoOpacity = scrollProgress < 0.35
+    ? 0
+    : scrollProgress < 0.45
+    ? (scrollProgress - 0.35) / 0.1
+    : scrollProgress <= 0.80
+    ? 1
+    : scrollProgress < 0.90
+    ? 1 - ((scrollProgress - 0.80) / 0.1)
+    : 0
+
+  // Phase 6 & 7: "Yume" text
+  // Fades in from 80-90%, then stays visible
+  const yumeOpacity = scrollProgress < 0.80
+    ? 0
+    : scrollProgress < 0.90
+    ? (scrollProgress - 0.80) / 0.1
+    : 1
+
+  // Trigger completion callback when Yume text appears
+  useEffect(() => {
+    if (yumeOpacity > 0.5 && onVideoComplete) {
+      onVideoComplete(true)
+    }
+  }, [yumeOpacity, onVideoComplete])
+
+  // Calculate background color - transition from dark to white when Yume appears
+  const backgroundColor = yumeOpacity > 0 
+    ? '#ffffff' 
+    : 'var(--bg-dark)'
+
   return (
-    <section id="product-video" className="product-video" ref={sectionRef}>
-      <div className="product-video-container">
-        <div className="product-video-wrapper">
-          <div className="video-container">
-            {showIntroducing && (
-              <div className="introducing-text">
-                Introducing
-              </div>
-            )}
-            <video
-              ref={videoRef}
-              className="product-video-element"
-              muted
-              playsInline
-              onLoadedMetadata={handleVideoLoaded}
-              preload="metadata"
-            >
-              <source src="/assets/yume-tablet-video.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div className="video-shadow"></div>
+    <section 
+      id="product-video" 
+      className="product-video" 
+      ref={sectionRef}
+      style={{ background: backgroundColor }}
+    >
+      <div className="product-video-wrapper">
+        <div className="video-container">
+          {/* "Introducing" text */}
+          <div 
+            className="introducing-text"
+            style={{ opacity: introducingOpacity }}
+          >
+            Introducing
+          </div>
+
+          {/* Video */}
+          <video
+            ref={videoRef}
+            className="product-video-element"
+            style={{ opacity: videoOpacity }}
+            muted
+            playsInline
+            onLoadedMetadata={handleVideoLoaded}
+            preload="metadata"
+          >
+            <source src="/assets/yume-tablet-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          {/* "Yume" text */}
+          <div 
+            className="yume-text"
+            style={{ opacity: yumeOpacity }}
+          >
+            Yume
           </div>
         </div>
       </div>
