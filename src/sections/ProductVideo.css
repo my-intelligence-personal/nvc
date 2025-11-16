@@ -8,7 +8,7 @@
 
 .product-video {
   position: relative;
-  min-height: 300vh; /* Shorter section for faster completion */
+  min-height: 500vh; /* Taller section to allow more scroll during typing phase */
   background: var(--bg-dark); /* Dark background, transitions to white */
   margin: 0;
   padding: 0;
@@ -46,8 +46,8 @@
   z-index: 10;
   text-align: center;
   pointer-events: none;
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(4rem, 8vw, 8rem);
+  font-family: var(--font-heading);
+  font-size: var(--h1-size);
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--text-inverse);
@@ -67,7 +67,7 @@
 
 .yume-text {
   font-family: 'Anton', sans-serif;
-  font-size: clamp(21rem, 42vw, 35rem);
+  font-size: clamp(12rem, 25vw, 35rem);
   font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--navy-800);
@@ -77,8 +77,8 @@
 }
 
 .tagline-text {
-  font-family: 'Amsterdam Two', cursive, 'Dancing Script', cursive;
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-family: var(--font-accent);
+  font-size: var(--h2-size);
   font-weight: normal;
   color: var(--navy-800);
   line-height: 1.4;
@@ -128,8 +128,8 @@
   right: 0;
   z-index: 10;
   text-align: center;
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(0.95rem, 1.5vw, 1.125rem);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
   color: var(--navy-600);
   max-width: 600px;
   margin-left: auto;
@@ -139,23 +139,16 @@
 
 @media (max-width: 768px) {
   .product-video {
-    min-height: 300vh;
-  }
-
-  .introducing-text {
-    font-size: clamp(3rem, 10vw, 6rem);
+    min-height: 500vh;
   }
 
   .yume-text {
-    font-size: clamp(15.75rem, 35vw, 26.25rem);
-  }
-
-  .tagline-text {
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-size: clamp(10rem, 25vw, 20rem);
   }
 
   .product-video-copy {
     bottom: 5vh;
+    padding: 0 var(--page-padding);
   }
 }
 

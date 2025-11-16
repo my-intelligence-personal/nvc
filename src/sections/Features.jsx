@@ -85,35 +85,35 @@ const Features = () => {
   const cards = [
     {
       title: "Blue-Light Filter",
-      image: "/assets/black-and-white.jpg"
-    },
-    {
-      title: "Universal Compatibility",
-      image: "/assets/available-everywhere.jpg"
-    },
-    {
-      title: "Co-Creation and Choice",
-      image: "/assets/yume-options.jpg"
-    },
-    {
-      title: "AI-Generated Pictures",
-      image: "/assets/yume-story.jpg"
+      image: "/assets/card 1.jpg"
     },
     {
       title: "Preserving Connection",
       image: "/assets/father-daughter-using-yume.jpg"
     },
     {
-      title: "Adaptive Story Length",
-      image: "/assets/story-length.jpg"
+      title: "Co-Creation and Choice",
+      image: "/assets/card 3.jpg"
     },
     {
-      title: "End of Story Button",
-      image: "/assets/yume-ending.jpg"
+      title: "AI-Generated Pictures",
+      image: "/assets/card 4.jpg"
     },
     {
       title: "White Noise",
-      image: "/assets/yume-ending.jpg"
+      image: "/assets/card 7.jpg"
+    },
+    {
+      title: "Adaptive Story Length",
+      image: "/assets/card 5.jpg"
+    },
+    {
+      title: "End of Story Button",
+      image: "/assets/card%206.jpg"
+    },
+    {
+      title: "Universal Compatibility",
+      image: "/assets/card 2.jpg"
     }
   ];
 

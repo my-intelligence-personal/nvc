@@ -2,7 +2,7 @@
   position: relative;
   min-height: 150vh;
   background: var(--bg-light);
-  padding: 4rem 2rem;
+  padding: 4rem var(--page-padding);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,8 +15,8 @@
 }
 
 .testimonials-heading {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-family: var(--font-heading);
+  font-size: var(--h2-size);
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-main);
@@ -68,7 +68,7 @@
 }
 
 .expert-name {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-main);
@@ -76,7 +76,7 @@
 }
 
 .expert-role {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 400;
   color: var(--navy-600);
@@ -84,7 +84,7 @@
 }
 
 .expert-quote {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.7;
   color: var(--text-main);
@@ -92,7 +92,7 @@
 
 /* Divider Heading */
 .parents-heading {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
@@ -146,8 +146,8 @@
 }
 
 .testimonial-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: var(--body-size);
   line-height: 1.7;
   color: var(--text-main);
   opacity: 0.9;
@@ -184,7 +184,7 @@
 }
 
 .testimonial-name {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-main);
@@ -192,7 +192,7 @@
 }
 
 .testimonial-parent-of {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 400;
   color: var(--navy-600);
@@ -212,10 +212,6 @@
 }
 
 @media (max-width: 768px) {
-  .testimonials {
-    padding: 2rem 1.5rem;
-  }
-
   .testimonials-heading {
     margin-bottom: 2rem;
   }

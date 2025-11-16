@@ -1,209 +1,94 @@
 import { useEffect, useRef } from 'react'
 import './Testimonials.css'
 
-// Testimonials data is kept as is
+// Customer testimonials - 10 total
 const testimonials = [
   {
-    name: 'Sarah Mitchell',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'Yume has completely transformed our bedtime routine. My daughter actually looks forward to sleep now, and I love that we can still connect through stories even when I\'m traveling for work.'
+    name: 'Michael',
+    parentOf: 'parent of Saraha',
+    image: '/assets/p1.jpg',
+    testimonial: 'I can consider using Yume with my baby Saraha'
   },
   {
-    name: 'James Chen',
+    name: 'David',
     parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The sleep mode lock is a game-changer. No more late-night app switching, and the blue-light filter means my son falls asleep faster. We\'ve seen a real difference in his sleep quality.'
+    image: '/assets/p2.jpg',
+    testimonial: 'What I find remarkable about Yume is that it does not simply remove technology, it transforms it.'
   },
   {
-    name: 'Emma Rodriguez',
-    parentOf: 'parent of three',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'As a busy parent, recording my voice for stories means everything. My kids hear me even when I\'m working late, and the AI visuals are so gentle and calming. Yume feels like magic.'
-  },
-  {
-    name: 'Michael Thompson',
+    name: 'James',
     parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The co-creation feature is brilliant. My kids love choosing what happens next, and it keeps them engaged without overstimulating them. Bedtime has become our favorite time together.'
+    image: '/assets/p3.jpg',
+    testimonial: 'By turning any device into a soothing, e-ink–like tool, Yume respects the child\'s natural sensory needs and supports their transition into sleep in a gentle, developmentally aligned way.'
   },
   {
-    name: 'Lisa Park',
+    name: 'Sarah',
     parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'We\'ve tried everything for bedtime, but Yume is the only thing that consistently works. The soft visuals and calming sounds help my daughter drift off naturally every single night.'
+    image: '/assets/p4.jpg',
+    testimonial: 'The calming colors, slow pace, and structured storytelling reduce sensory overload and create the kind of predictable routine that children need to feel safe and ready to rest.'
   },
   {
-    name: 'David Martinez',
+    name: 'Emma',
     parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The offline download feature is perfect for our camping trips. My kids get their bedtime stories even without WiFi, and it helps maintain our routine no matter where we are.'
+    image: '/assets/p5.jpg',
+    testimonial: 'From a psychomotor perspective, the interactive storytelling component is especially meaningful.'
   },
   {
-    name: 'Jennifer Lee',
+    name: 'Olivia',
     parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'I was skeptical about screen time before bed, but Yume changed my mind. The blue-light filter and sleep mode make it feel completely different from regular apps. It\'s designed for rest.'
+    image: '/assets/p6.jpg',
+    testimonial: 'Allowing the child to choose between story options awakens imagination, encourages symbolic play and supports cognitive and emotional expressional within a calm, regulated environment.'
   },
   {
-    name: 'Robert Kim',
-    parentOf: 'parent of three',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The progress insights are fascinating. Seeing how different stories affect sleep onset times helps me choose the right content for each child. It\'s like having a sleep coach built in.'
+    name: 'Robert & Jessica',
+    parentOf: 'parents of two',
+    image: '/assets/p7.jpg',
+    testimonial: 'This transforms bedtime from a passive screen habit into a mindful experience that strengthens the parent–child bond.'
   },
   {
-    name: 'Amanda White',
+    name: 'Daniel & Emily',
+    parentOf: 'parents of one',
+    image: '/assets/p8.jpg',
+    testimonial: 'Yume\'s ability to track non-invasive cues, adjust the pacing and end the story softly aligns beautifully with what we know about the nervous system and sleep onset.'
+  },
+  {
+    name: 'Sophia',
     parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'My son used to fight bedtime every night. Now he asks for Yume stories and falls asleep peacefully. The transformation in our evenings has been incredible.'
+    image: '/assets/p9.jpg',
+    testimonial: 'Transitioning into white, pink, or brown noise afterward is another element that supports healthy sensory regulation and deep sleep.'
   },
   {
-    name: 'Christopher Brown',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The custom voice recording feature means I can be part of bedtime even when I\'m away. My daughter loves hearing my voice tell her stories, and it makes us both feel connected.'
-  },
-  {
-    name: 'Nicole Garcia',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'Yume has replaced all our other bedtime apps. The combination of storytelling, gentle visuals, and sleep sounds creates the perfect environment for rest. Highly recommend!'
-  },
-  {
-    name: 'Thomas Wilson',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The adaptive bedtime rhythm feature is genius. It learns my daughter\'s patterns and adjusts the story pacing to help her fall asleep faster. Technology that actually understands sleep.'
-  },
-  {
-    name: 'Rachel Taylor',
-    parentOf: 'parent of three',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'As a single parent, Yume has been a lifesaver. I can record stories ahead of time, and my kids get quality bedtime content even when I\'m exhausted. It\'s become essential.'
-  },
-  {
-    name: 'Daniel Anderson',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The branching stories keep my kids engaged without overstimulating them. They love making choices, and I love that it all leads to peaceful sleep. Perfect balance.'
-  },
-  {
-    name: 'Michelle Clark',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'Yume has improved my son\'s sleep quality dramatically. He falls asleep faster, sleeps deeper, and wakes up more rested. The science behind it really works.'
-  },
-  {
-    name: 'Kevin Moore',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The multi-child profiles are perfect for our family. Each kid gets personalized stories based on their preferences, and the app remembers what works for each one.'
-  },
-  {
-    name: 'Stephanie Harris',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'I love how Yume respects bedtime. The sleep mode lock means no late-night scrolling, and the automatic soft ending ensures stories don\'t go on too long. Thoughtful design.'
-  },
-  {
-    name: 'Brian Jackson',
-    parentOf: 'parent of three',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The exclusive monthly story drops keep things fresh. My kids always have something new to look forward to, and the quality is consistently excellent.'
-  },
-  {
-    name: 'Lauren Martin',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'Yume has made bedtime something we all enjoy instead of dread. The stories are beautiful, the technology is smart, and the results speak for themselves.'
-  },
-  {
-    name: 'Ryan Davis',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The white noise feature after stories is perfect. It helps my daughter transition from story time to deep sleep seamlessly. Everything is designed with sleep in mind.'
-  },
-  {
-    name: 'Jessica Miller',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'As a pediatric sleep consultant, I recommend Yume to all my clients. It\'s the only app I\'ve found that truly supports healthy sleep patterns in children.'
-  },
-  {
-    name: 'Matthew Lewis',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The personalized story worlds feature creates such unique experiences. My daughter feels like each story is made just for her, which makes bedtime special.'
-  },
-  {
-    name: 'Ashley Walker',
-    parentOf: 'parent of three',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'Yume has become our family\'s bedtime ritual. Even my oldest, who thought they were too old for bedtime stories, loves the interactive elements.'
-  },
-  {
-    name: 'Joshua Hall',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The sound effects add so much to the stories without being overwhelming. They\'re subtle and enhance the experience without disrupting sleep.'
-  },
-  {
-    name: 'Emily Young',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'I appreciate how Yume balances technology with human connection. It enhances our bedtime routine rather than replacing it. It feels like a tool, not a replacement.'
-  },
-  {
-    name: 'Andrew King',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The unlimited co-creation paths mean bedtime never gets boring. My kids can explore different story branches every night, keeping things fresh and engaging.'
-  },
-  {
-    name: 'Samantha Wright',
-    parentOf: 'parent of three',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'Yume has transformed our evenings. What used to be a struggle is now peaceful and enjoyable. The whole family benefits from better sleep routines.'
-  },
-  {
-    name: 'Brandon Lopez',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The advanced sleep sensing feature is incredible. It adapts to my son\'s nightly patterns and optimizes the experience for better sleep. Truly innovative.'
-  },
-  {
-    name: 'Olivia Hill',
-    parentOf: 'parent of two',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'Yume understands that bedtime isn\'t just about sleep—it\'s about connection, calm, and creating positive memories. It shows in every detail.'
-  },
-  {
-    name: 'Nathan Green',
-    parentOf: 'parent of one',
-    image: '/assets/father-daughter-using-yume.jpg',
-    testimonial: 'The priority access to new features means we always get the latest improvements first. It\'s clear the team is constantly innovating and listening to families.'
+    name: 'Amanda & Christopher',
+    parentOf: 'parents of two',
+    image: '/assets/p10.jpg',
+    testimonial: 'In my professional view, Yume is much more than a bedtime app, it is a thoughtful, research-informed tool that can truly support children\'s well-being, help parents build healthier routines, and enhance the quality of family life.'
   }
 ]
 
-// Data for the new expert cards
+// Data for the expert/specialist cards
 const expertTestimonials = [
   {
-    name: 'Dr. Alistair Reed',
-    role: 'Pediatric Sleep Specialist',
-    image: '/assets/father-daughter-using-yume.jpg', // Using placeholder image
-    testimonial: 'Yume is a breakthrough in pediatric sleep technology. By aligning screen time with natural circadian rhythms, it turns a common obstacle into a powerful tool for healthier, more restorative sleep.'
+    name: 'Psychologist',
+    role: 'Psychologist',
+    image: '/assets/father-daughter-using-yume.jpg',
+    testimonial: 'As a psychologist, I find Yume\'s approach well aligned with proven bedtime-routine strategies. Its calming stories, limited choices, and gentle cues support healthy sleep.'
   },
   {
-    name: 'Dr. Evelyn Sato',
-    role: 'Child Psychologist',
-    image: '/assets/father-daughter-using-yume.jpg', // Using placeholder image
-    testimonial: 'The app’s co-creation model is brilliant. It empowers children by giving them agency in their bedtime routine, which can significantly reduce bedtime anxiety and foster a positive, lifelong relationship with sleep.'
+    name: 'Psychomotor Therapist',
+    role: 'Psychomotor Therapist',
+    image: '/assets/father-daughter-using-yume.jpg',
+    testimonial: 'As a psychomotor therapist with extensive experience working with children and supporting families, I see Yume as a deeply valuable and innovative solution to a very real problem in early childhood. Bedtime has increasingly become a source of overstimulation for young children due to bright screens, rapid visuals, and the constant flow of digital content. These elements directly affect sleep quality, emotional regulation, attention and overall development.'
   }
 ];
 
-// Create arrays with 10 cards each for the two rows
-const row1 = testimonials.slice(0, 10)
-const row2 = testimonials.slice(10, 20)
+// Create arrays with 5 cards each for the two rows, then duplicate for infinite scroll effect
+// Note: We have 11 testimonials total (including Saraha), so we'll use 5 in row1 and 5 in row2
+const row1Cards = testimonials.slice(0, 5)
+const row2Cards = testimonials.slice(5, 10)
+
+// Duplicate each row to create seamless infinite scroll
+const row1 = [...row1Cards, ...row1Cards]
+const row2 = [...row2Cards, ...row2Cards]
 
 // A single card component for reusability
 const TestimonialCard = ({ testimonial, row, index }) => (
@@ -241,9 +126,10 @@ function Testimonials() {
       const progress = Math.max(0, Math.min(1, (windowHeight - top) / (windowHeight + height)))
 
       // Calculate translation distance
+      // Each row has 5 cards duplicated, so we scroll through 5 cards worth
       const cardWidth = 360
       const gap = 32 // 2rem
-      const totalWidth = (cardWidth + gap) * 10
+      const totalWidth = (cardWidth + gap) * 5 // 5 cards per row
       const scrollDistance = totalWidth - window.innerWidth + 200
 
       const translate1 = -progress * scrollDistance

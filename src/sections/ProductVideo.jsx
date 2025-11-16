@@ -81,21 +81,24 @@ function ProductVideo({ onVideoComplete }) {
   // Video fades out by 65%, whitescreen gap from 65-75%
   
   // Phase 7: "YUME" text
-  // Fades in from 75-85%, then stays visible
-  const yumeOpacity = scrollProgress < 0.75
+  // Fades in from 60-65%, then stays visible
+  const yumeOpacity = scrollProgress < 0.60
     ? 0
-    : scrollProgress < 0.85
-    ? (scrollProgress - 0.75) / 0.1
+    : scrollProgress < 0.65
+    ? (scrollProgress - 0.60) / 0.05
     : 1
 
   // Phase 8: "Designing Dreams" typewriter animation
-  // Starts typing from 80% scroll progress to 100%
+  // Starts typing from 65% scroll progress to 95%
+  // This creates a longer scroll range where the viewport appears pinned
   const taglineText = "Designing Dreams"
-  const typewriterProgress = scrollProgress < 0.80
+  const typewriterStart = 0.65
+  const typewriterEnd = 0.95
+  const typewriterProgress = scrollProgress < typewriterStart
     ? 0
-    : scrollProgress >= 1.0
+    : scrollProgress >= typewriterEnd
     ? 1
-    : (scrollProgress - 0.80) / 0.20
+    : (scrollProgress - typewriterStart) / (typewriterEnd - typewriterStart)
   
   const revealedChars = Math.floor(typewriterProgress * taglineText.length)
   const displayedText = taglineText.substring(0, revealedChars)
@@ -109,8 +112,8 @@ function ProductVideo({ onVideoComplete }) {
   }, [yumeOpacity, onVideoComplete])
 
   // Calculate background color - transition from dark to white when video fades out
-  // Background becomes white at 65% (when video is gone), stays white for whitescreen gap
-  const backgroundColor = scrollProgress >= 0.65
+  // Background becomes white at 60% (when YUME starts appearing), stays white
+  const backgroundColor = scrollProgress >= 0.60
     ? '#ffffff' 
     : 'var(--bg-dark)'
 

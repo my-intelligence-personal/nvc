@@ -2,9 +2,10 @@
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
-  padding: 2rem;
+  padding: var(--page-padding);
+  padding-bottom: 4rem;
   overflow: hidden;
 }
 
@@ -25,14 +26,8 @@
 .rest-content {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
+  max-width: 600px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding-left: 4rem;
-  min-height: 100vh;
 }
 
 .rest-question {
@@ -41,12 +36,12 @@
 }
 
 .rest-heading {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--text-inverse);
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 }
 
 .rest-heading em {
@@ -60,8 +55,8 @@
 }
 
 .rest-subheading {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-family: var(--font-heading);
+  font-size: var(--h2-size);
   font-weight: 600;
   line-height: 1.4;
   color: var(--text-inverse);
@@ -69,9 +64,9 @@
 }
 
 .rest-body {
-  font-family: 'RafaleBG', sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.8;
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-line-height);
   color: var(--text-muted);
 }
 
@@ -84,29 +79,28 @@
 }
 
 @media (max-width: 1024px) {
-  .rest-content {
-    padding-left: 2rem;
+  .rest-heading {
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
+  .rest-heading {
+    font-size: 2rem;
+  }
+  
   .rest-section {
-    padding: 1.5rem;
+    justify-content: center;
+    text-align: center;
   }
 
   .rest-content {
-    padding-right: 0;
-    align-items: center;
-    text-align: center;
+    max-width: 100%;
   }
 
   .rest-question,
   .rest-solution {
     max-width: 100%;
-  }
-
-  .rest-heading {
-    margin-bottom: 2rem;
   }
 }
 

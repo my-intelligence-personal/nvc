@@ -32,7 +32,7 @@ function HeroProblem() {
       <div className="hero-content">
         <div className="hero-text" ref={textRef}>
           <h1 className="hero-heading">
-            <span>What keeps them <em>entertained</em>,</span>
+            <span>What keeps them <em>entertained</em></span>
             <br />
             <span>keeps them <em>awake</em>.</span>
           </h1>

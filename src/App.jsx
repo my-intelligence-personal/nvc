@@ -19,16 +19,16 @@ function App() {
   return (
     <div className="app">
       <Navigation />
-      <div id="hero-problem" className="section-container"><HeroProblem /></div>
-      <div id="rest-section-container" className="section-container"><RestSection /></div>
-      <div id="product-video" className="section-container"><ProductVideo onVideoComplete={setVideoComplete} /></div>
-      <div className="section-container"><AppShowcase /></div>
-      <div className="section-container"><Features /></div>
-      <div className="section-container"><Plans /></div>
-      <div className="section-container"><Testimonials /></div>
-      <div className="section-container"><FakeDemo /></div>
-      <div className="section-container"><ContactForm /></div>
-      <div className="section-container"><Footer /></div>
+      <section id="hero-problem"><HeroProblem /></section>
+      <section id="rest-section"><RestSection /></section>
+      <section id="product-video"><ProductVideo onVideoComplete={setVideoComplete} /></section>
+      <section id="app-showcase"><AppShowcase /></section>
+      <section id="features"><Features /></section>
+      <section id="plans"><Plans /></section>
+      <section id="testimonials"><Testimonials /></section>
+      <section id="fake-demo"><FakeDemo /></section>
+      <section id="contact-form"><ContactForm /></section>
+      <Footer />
     </div>
   )
 }

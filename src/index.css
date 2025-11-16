@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Dancing+Script&display=swap');
+
 @font-face {
   font-family: 'RafaleBG';
   src: url('/assets/Rafale BG.otf') format('opentype');
@@ -30,6 +32,37 @@
 
   --card-border: var(--blue-100);
   --card-highlight: var(--cream-100);
+
+  /* Typography */
+  --font-heading: 'DM Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-accent: 'Dancing Script', cursive;
+
+  --h1-size: 4.5rem; /* 72px */
+  --h2-size: 3rem;   /* 48px */
+  --body-size: 1.125rem; /* 18px */
+  --body-line-height: 1.7;
+
+  /* Layout */
+  --content-width: 1200px;
+  --page-padding: 4.5rem; /* 72px */
+}
+
+@media (max-width: 1024px) { /* Tablet */
+  :root {
+    --h1-size: 3.5rem; /* 56px */
+    --h2-size: 2.5rem; /* 40px */
+    --body-size: 1rem; /* 16px */
+    --page-padding: 3rem; /* 48px */
+  }
+}
+
+@media (max-width: 767px) { /* Mobile */
+  :root {
+    --h1-size: 2.5rem; /* 40px */
+    --h2-size: 1.75rem; /* 28px */
+    --page-padding: 1.5rem; /* 24px */
+  }
 }
 
 * {
@@ -43,13 +76,29 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--body-size);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-main);
-  line-height: 1.6;
+  line-height: var(--body-line-height);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+h1 { font-size: var(--h1-size); }
+h2 { font-size: var(--h2-size); }
+
+.container {
+    width: 100%;
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--page-padding);
+    padding-right: var(--page-padding);
 }
 
 @media (prefers-reduced-motion: reduce) {

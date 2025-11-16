@@ -55,7 +55,6 @@ function Plans() {
   ]
 
   const sharedFeatures = [
-    { icon: '✨', label: 'Sleep Mode Lock' },
     { icon: '🌙', label: 'Blue-light–free mode' },
     { icon: '💤', label: 'Automatic soft ending' },
     { icon: '🔊', label: 'White noise after the story' }

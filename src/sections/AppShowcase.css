@@ -2,14 +2,14 @@
   position: relative;
   min-height: auto;
   background: var(--bg-light);
-  padding: 4rem 2rem;
+  padding: 4rem var(--page-padding);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .app-showcase-container {
-  max-width: 2400px;
+  max-width: var(--content-width);
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -48,12 +48,13 @@
 }
 
 .showcase-heading {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3vw, 3.5rem);
   font-weight: 600;
   line-height: 1.2;
   color: var(--navy-800);
   margin-bottom: 2rem;
+  max-width: 100%;
 }
 
 .showcase-heading em {
@@ -66,14 +67,16 @@
 }
 
 .showcase-body {
-  font-family: 'RafaleBG', sans-serif;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  line-height: 1.8;
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-line-height);
   color: var(--navy-600);
+  max-width: 650px;
 }
 
 .showcase-body p {
   margin-bottom: 1.5rem;
+  max-width: 100%;
 }
 
 .showcase-body p:last-child {
@@ -88,8 +91,8 @@
 
 @media (max-width: 768px) {
   .app-showcase {
-    padding: 2rem 1.5rem;
-    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .app-showcase-container {

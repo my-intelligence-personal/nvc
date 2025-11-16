@@ -36,8 +36,8 @@ function AppShowcase() {
         </div>
         <div className="app-showcase-text" ref={textRef}>
           <h2 className="showcase-heading">
-            The app that makes sleep <em>healthier</em>,<br />
-            stories <em>richer</em>, and your bond <em>stronger</em>.
+            The app that makes sleep <em>healthier</em>, stories <em>richer</em>,<br />
+            and your bond <em>stronger</em>.
           </h2>
           <div className="showcase-body">
             <p>You read while they choose what happens next.</p>

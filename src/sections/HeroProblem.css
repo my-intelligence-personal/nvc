@@ -2,9 +2,11 @@
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-end;
-  padding: 2rem;
+  padding: var(--page-padding);
+  padding-right: 0.5rem;
+  padding-bottom: 4rem;
   background: var(--bg-dark);
   overflow: hidden;
 }
@@ -34,15 +36,13 @@
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
+  max-width: 800px;
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 4rem;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .hero-text {
-  max-width: 1200px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -55,12 +55,12 @@
 }
 
 .hero-heading {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-family: var(--font-heading);
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-inverse);
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
   white-space: pre-line;
 }
 
@@ -74,15 +74,15 @@
 }
 
 .hero-body {
-  font-family: 'RafaleBG', sans-serif;
-  font-size: clamp(1rem, 2.5vw, 2.25rem);
-  line-height: 1.7;
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-line-height);
   color: var(--text-muted);
-  margin-bottom: 1rem;
+  max-width: 50ch;
 }
 
 .hero-body p {
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-body p:last-child {
@@ -94,29 +94,30 @@
 }
 
 @media (max-width: 1024px) {
-  .hero-content {
-    padding-right: 2rem;
+  .hero-heading {
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .hero-problem {
-    padding: 1.5rem;
     justify-content: center;
+    text-align: center;
   }
 
   .hero-content {
-    padding-right: 0;
-    justify-content: center;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
   }
 
   .hero-text {
     text-align: center;
-    max-width: 100%;
   }
 
   .hero-heading {
-    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    white-space: normal;
   }
 }
 
