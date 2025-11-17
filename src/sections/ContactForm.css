@@ -9,6 +9,7 @@
 }
 
 .form-container {
+  position: relative;
   background-color: var(--bg-light);
   border-radius: 16px;
   padding: 48px;
@@ -69,17 +70,64 @@
   background-color: #fffadd;
 }
 
+.submit-button:disabled {
+  background-color: var(--blue-100);
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #D8000C; /* A standard error red */
+  background-color: #FFD2D2; /* Light red background */
+  border: 1px solid #D8000C;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
 .unsubscribe-note {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
 
 .success-message {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
   padding: 2rem 0;
+}
+
+.back-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: var(--navy-600);
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  border-radius: 4px;
+}
+
+.back-button:hover {
+  color: var(--navy-800);
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: translateX(-2px);
+}
+
+.back-button:active {
+  transform: translateX(-4px);
 }
 
 .success-icon {
