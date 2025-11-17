@@ -12,7 +12,10 @@ function Footer() {
           </h2>
         </div>
         <div className="footer-right">
-          <a href="https://www.instagram.com/yumeapp_official/" className="social-icon" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+          <a href="https://www.instagram.com/yumeapp_official/" className="social-icon" target="_blank" rel="noopener noreferrer">
+            <FaInstagram />
+            <span className="social-text">@yumeapp_official</span>
+          </a>
         </div>
       </div>
       <div className="footer-bottom">

@@ -39,7 +39,7 @@ function Plans() {
     },
     {
       name: 'INFINITE',
-      subtitle: 'For parents who want every night to feel uniquely crafted for their child.',
+      subtitle: 'For parents who want every night to feel uniquely crafted for the entire family.',
       price: '£11.99',
       features: [
         'Unlimited co-creation paths (branching stories with adaptive complexity)',
