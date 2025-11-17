@@ -69,7 +69,7 @@ function Testimonials() {
 
         {/* Divider Heading */}
         <h3 className="parents-heading">
-          Already transforming the lives of real parents
+          Ready to transform the lives of real parents
         </h3>
 
         {/* Parent Testimonials Grid */}
