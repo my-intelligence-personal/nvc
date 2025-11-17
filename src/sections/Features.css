@@ -103,6 +103,11 @@
   -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0) 100%);
 }
 
+.co-creation-card .feature-card-title {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
 
 /* Media queries for responsiveness */
 @media (max-width: 1024px) {

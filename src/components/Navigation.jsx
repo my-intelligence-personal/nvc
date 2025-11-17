@@ -164,7 +164,7 @@ function Navigation() {
         <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           <button onClick={() => scrollTo('features')} className="nav-link">FEATURES</button>
           <button onClick={() => scrollTo('plans')} className="nav-link">SUBSCRIPTION PLANS</button>
-          <button onClick={() => scrollTo('testimonials')} className="nav-link">TESTIMONIALS</button>
+          <button onClick={() => scrollTo('testimonials')} className="nav-link">FEEDBACK</button>
           <button onClick={handleDemoClick} className="nav-link">DEMO</button>
           <button onClick={() => scrollTo('waitlist')} className="nav-link cta">JOIN</button>
         </div>

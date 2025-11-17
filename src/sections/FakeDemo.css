@@ -36,19 +36,19 @@
   .demo-rectangle {
     position: relative;
     width: 100%;
-    max-width: 1200px;
-    aspect-ratio: 4 / 3;
+    max-width: 900px;
+    aspect-ratio: 16 / 10;
     background-image: url('/assets/background.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border: 2px solid var(--card-border);
     border-radius: 16px;
-    padding: 60px 40px;
+    padding: 40px 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 60px;
+    gap: 24px;
     transition: background-color 0.3s ease;
     min-height: 0;
     flex-shrink: 0;
@@ -66,7 +66,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    background-size: cover;
+    background-position: center;
     border-radius: 16px;
     z-index: 1;
   }
@@ -79,7 +80,35 @@
     padding: 40px 48px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
     color: white;
-    font-size: var(--h2-size);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    z-index: 5;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .demo-slide-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--text-inverse);
+    text-align: center;
+    z-index: 5;
+  }
+
+  .demo-slide-text-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 48px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+    color: white;
+    font-size: 1.75rem;
     font-weight: 700;
     line-height: 1.5;
     text-align: center;
@@ -200,13 +229,38 @@
     color: var(--text-muted);
   }
   
+  .demo-opening-text {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    color: var(--text-inverse);
+    font-weight: 700;
+    text-align: center;
+    z-index: 2;
+    opacity: 0.9;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 100%;
+  }
+
   .demo-image-container {
-    width: 288px;
-    height: 288px;
+    width: 220px;
+    height: 220px;
+    min-width: 220px;
+    min-height: 220px;
+    aspect-ratio: 1;
     cursor: pointer;
     transition: transform 0.3s ease;
     overflow: hidden;
     border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
   }
   
   .demo-image {
@@ -214,6 +268,25 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  .demo-letter {
+    font-size: 1.5rem; /* Adjust font size for longer text */
+    font-weight: 700;
+    color: var(--text-inverse);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .demo-letter-double {
+    font-size: 1.2rem;
+  }
+
+  .demo-letter-triple {
+    font-size: 1rem;
   }
   
   .demo-image-container:hover {
@@ -308,15 +381,37 @@
   
     .demo-rectangle {
       flex-direction: column;
-      padding: 40px 24px;
-      gap: 40px;
-      max-width: 90%;
-      aspect-ratio: 4 / 3;
+      padding: 30px 20px;
+      gap: 20px;
+      max-width: 95%;
+      aspect-ratio: 16 / 10;
+    }
+
+    .demo-opening-text {
+      font-size: 2rem;
+      top: 10%;
+      font-weight: 700;
     }
   
     .demo-image-container {
-      width: 240px;
-      height: 240px;
+      width: 140px;
+      height: 140px;
+      min-width: 140px;
+      min-height: 140px;
+      aspect-ratio: 1;
+      flex-shrink: 0;
+    }
+
+    .demo-letter {
+      font-size: 1.2rem;
+    }
+
+    .demo-letter-double {
+      font-size: 1rem;
+    }
+
+    .demo-letter-triple {
+      font-size: 0.9rem;
     }
   
     .story-arrow-left {
@@ -366,7 +461,17 @@
     
     .demo-slide-text {
       padding: 24px 28px;
-      font-size: var(--h2-size);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .demo-slide-label {
+      font-size: 5rem;
+    }
+
+    .demo-slide-text-label {
+      padding: 24px 28px;
+      font-size: 1.5rem;
       font-weight: 700;
     }
     

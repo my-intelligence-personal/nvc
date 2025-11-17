@@ -88,8 +88,8 @@ const Features = () => {
       image: "/assets/card 1.jpg"
     },
     {
-      title: "Preserving Connection",
-      image: "/assets/father-daughter-using-yume.jpg"
+      title: "Universal Compatibility",
+      image: "/assets/card 2.jpg"
     },
     {
       title: "Co-Creation and Choice",
@@ -100,8 +100,8 @@ const Features = () => {
       image: "/assets/card 4.jpg"
     },
     {
-      title: "White Noise",
-      image: "/assets/card 7.jpg"
+      title: "Preserving Connection",
+      image: "/assets/father-daughter-using-yume.jpg"
     },
     {
       title: "Adaptive Story Length",
@@ -112,8 +112,8 @@ const Features = () => {
       image: "/assets/card%206.jpg"
     },
     {
-      title: "Universal Compatibility",
-      image: "/assets/card 2.jpg"
+      title: "White Noise",
+      image: "/assets/card 7.jpg"
     }
   ];
 
@@ -126,7 +126,7 @@ const Features = () => {
           </div>
           <div className="features-cards">
             {cards.map((card, index) => (
-              <div key={index} className="feature-card">
+              <div key={index} className={`feature-card ${card.title === "Co-Creation and Choice" ? "co-creation-card" : ""}`}>
                 <div className="feature-card-image">
                   <img src={card.image} alt={card.title} />
                 </div>

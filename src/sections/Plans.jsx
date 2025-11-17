@@ -11,7 +11,7 @@ function Plans() {
   const plans = [
     {
       name: 'STARTER',
-      subtitle: 'For parents trying Yume for the first time for their child.',
+      subtitle: 'For parents trying Yume for the first time.',
       price: 'Free',
       isFree: true,
       features: [

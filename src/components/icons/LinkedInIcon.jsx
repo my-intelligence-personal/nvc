@@ -11,3 +11,4 @@ const LinkedInIcon = () => (
 );
 
 export default LinkedInIcon;
+

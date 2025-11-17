@@ -1,64 +1,41 @@
 
 import React, { useState, useEffect } from 'react';
 import './FakeDemo.css';
+import { storyData } from '../story-data';
 
 const FakeDemo = () => {
-  const [choiceMade, setChoiceMade] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(1);
+  const [gameState, setGameState] = useState('start'); // 'start', 'playing', 'choice'
+  const [story, setStory] = useState(null);
+  const [step, setStep] = useState(0);
+  const [path, setPath] = useState(['s1']);
+  const [isEnding, setIsEnding] = useState(false);
 
-  // SAM images for each slide (10 slides mapped to 5 images)
-  const slideImages = {
-    1: '/assets/sam 1.jpg',
-    2: '/assets/sam 1.jpg',
-    3: '/assets/sam 2.jpg',
-    4: '/assets/sam 2.jpg',
-    5: '/assets/sam 3.jpg',
-    6: '/assets/sam 3.jpg',
-    7: '/assets/sam 4.jpg',
-    8: '/assets/sam 4.jpg',
-    9: '/assets/sam 5.jpg',
-    10: '/assets/sam 5.jpg',
-  };
-
-  // Story text for each slide (10 slides total)
-  const slideTexts = {
-    1: "A brave traveler named Sam stood at the ocean's edge.",
-    2: "Glowing rainbow stepping stones floated on the water ahead.",
-    3: "Sam hopped across the colorful stones.",
-    4: "Happy dolphins splashed and jumped in the sparkling waves below.",
-    5: "Sam rested on a wide stone in the middle of the ocean.",
-    6: "A friendly pelican sat nearby sharing crackers.",
-    7: "Dark clouds gathered but the stones glowed brighter.",
-    8: "The dolphins swam close, guiding Sam safely forward.",
-    9: "Sam reached the sandy beach with tall palm trees.",
-    10: "Sam waved goodbye to the dolphins and magical stones.",
-  };
-
-  const handleChoice = (e) => {
-    e.preventDefault();
-    const scrollPosition = window.scrollY;
-    setChoiceMade(true);
-    setCurrentSlide(1);
-    // Maintain scroll position
-    requestAnimationFrame(() => {
-      window.scrollTo(0, scrollPosition);
-    });
-  };
-
-  const handleRightArrowClick = () => {
-    if (currentSlide < 10) {
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
-
-  const handleLeftArrowClick = () => {
-    if (currentSlide > 1) {
-      setCurrentSlide(currentSlide - 1);
-    }
-  };
-
+  const currentPathId = path[path.length - 1];
+  
   const handleStarClick = () => {
-    setCurrentSlide(10);
+    const findEndingPath = (currentPath) => {
+      let node = storyData.stories[story][currentPath[currentPath.length - 1]];
+      let newPath = [...currentPath];
+
+      while (!node.ending) {
+        if (node.choice) {
+          const nextChoiceId = node.choice.options[0].id;
+          newPath.push(nextChoiceId);
+          node = storyData.stories[story][nextChoiceId];
+        } else {
+          return null; // No path to an ending from here
+        }
+      }
+      return newPath;
+    };
+
+    const finalPath = findEndingPath(path);
+    if (finalPath) {
+      setPath(finalPath);
+      setIsEnding(true);
+      setStep(0);
+      setGameState('playing');
+    }
   };
 
   const handleTickClick = () => {
@@ -68,82 +45,163 @@ const FakeDemo = () => {
     });
   };
 
-  const handleRetry = () => {
-    setChoiceMade(false);
-    setCurrentSlide(1);
+  const handleChoice = (choiceId) => {
+    if (gameState === 'start') {
+      setStory(choiceId);
+      setGameState('playing');
+      setStep(0);
+    } else if (gameState === 'choice') {
+      const newPath = [...path, choiceId];
+      setPath(newPath);
+      setGameState('playing');
+      setStep(0);
+    }
+  };
+  
+  const handleNext = () => {
+    const storyNode = storyData.stories[story][currentPathId];
+    
+    if (isEnding) {
+        if (step < storyNode.ending.length - 1) {
+            setStep(step + 1);
+        } else {
+            // Last ending subtitle, maybe do nothing or show a final screen
+        }
+        return;
+    }
+
+    if (step < storyNode.subtitles.length - 1) {
+      setStep(step + 1);
+    } else {
+        if (storyNode.choice) {
+            setGameState('choice');
+        } else if (storyNode.ending) {
+            setIsEnding(true);
+            setStep(0);
+        }
+    }
   };
 
-  // Keyboard navigation
-  useEffect(() => {
-    if (!choiceMade) return;
+  const handlePrevious = () => {
+    if (isEnding && step > 0) {
+        setStep(step - 1);
+        return;
+    }
+      
+    if (isEnding && step === 0) {
+        setIsEnding(false);
+        setStep(storyData.stories[story][currentPathId].subtitles.length - 1);
+        return;
+    }
 
+    if (step > 0) {
+      setStep(step - 1);
+    } else {
+      if (path.length > 1) {
+        const newPath = path.slice(0, -1);
+        setPath(newPath);
+        setGameState('choice');
+      }
+    }
+  };
+
+  const handleRetry = () => {
+    setGameState('start');
+    setStory(null);
+    setStep(0);
+    setPath(['s1']);
+    setIsEnding(false);
+  };
+  
+  useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        if (currentSlide > 1) {
-          setCurrentSlide(currentSlide - 1);
-        }
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        if (currentSlide < 10) {
-          setCurrentSlide(currentSlide + 1);
-        }
+      if (gameState !== 'playing') return;
+      if (e.key === 'ArrowRight') {
+        handleNext();
+      } else if (e.key === 'ArrowLeft') {
+        handlePrevious();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [choiceMade, currentSlide]);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [gameState, step, path, story, isEnding]);
 
-  const currentImage = slideImages[currentSlide];
-  const currentText = slideTexts[currentSlide];
+  const renderContent = () => {
+    if (gameState === 'start') {
+      return (
+        <>
+          <div className="demo-opening-text">{storyData.opening.text}</div>
+          {storyData.opening.choices.map((choice) => (
+            <div key={choice.id} className="demo-image-container" onClick={() => handleChoice(choice.id)}>
+              <img src={choice.image} alt={choice.text} className="demo-image"/>
+            </div>
+          ))}
+        </>
+      );
+    }
+
+    if (gameState === 'choice') {
+        const storyNode = storyData.stories[story][currentPathId];
+        return (
+            <>
+                <div className="star-button" onClick={handleStarClick}>★</div>
+                <div className="demo-opening-text">{storyNode.choice.text}</div>
+                {storyNode.choice.options.map((option) => (
+                    <div key={option.id} className="demo-image-container" onClick={() => handleChoice(option.id)}>
+                        <img src={option.image} alt={option.text} className="demo-image"/>
+                    </div>
+                ))}
+            </>
+        )
+    }
+
+    if (gameState === 'playing' && story) {
+        const storyNode = storyData.stories[story][currentPathId];
+        const subtitles = isEnding ? storyNode.ending : storyNode.subtitles;
+        const currentSubtitle = subtitles[step];
+        const isLastSlide = isEnding && step === storyNode.ending.length - 1;
+        
+        const getImageUrl = () => {
+            if (isEnding) {
+                return `/assets/p10.jpg`;
+            }
+            const imageIndex = (path.length - 1) * 2 + step + 1;
+            return `/assets/p${Math.min(imageIndex, 10)}.jpg`;
+        };
+
+      return (
+        <>
+          <div className="demo-slide-image" style={{backgroundImage: `url('${getImageUrl()}')`}}></div>
+          <div className="demo-slide-text-label">{currentSubtitle}</div>
+
+          {isLastSlide ? (
+            <div className="star-button tick-button" onClick={handleTickClick}>✓</div>
+          ) : (
+            <div className="star-button" onClick={handleStarClick}>★</div>
+          )}
+          
+          {step > 0 || path.length > 1 || isEnding ? (
+            <div className="story-arrow story-arrow-left" onClick={handlePrevious}>←</div>
+          ) : null}
+
+          {!isLastSlide && (
+            <div className="story-arrow story-arrow-right" onClick={handleNext}>→</div>
+          )}
+        </>
+      );
+    }
+  };
 
   return (
     <div id="fake-demo" className="fake-demo-section">
-      <h2>Try the demo below</h2>
+      <h2>Shall we begin?</h2>
       <div className="demo-rectangle-wrapper">
         <div className="demo-rectangle">
-          {!choiceMade ? (
-            <>
-              <div className="demo-image-container" onClick={handleChoice}>
-                <img src="/assets/scenario 1.jpg" alt="Scenario 1" className="demo-image" />
-              </div>
-              <div className="demo-image-container" onClick={handleChoice}>
-                <img src="/assets/scenario 2.jpg" alt="Scenario 2" className="demo-image" />
-              </div>
-              <div className="demo-image-container" onClick={handleChoice}>
-                <img src="/assets/scenario 3.jpg" alt="Scenario 3" className="demo-image" />
-              </div>
-            </>
-          ) : (
-            <>
-              <img 
-                src={currentImage} 
-                alt={`Slide ${currentSlide}`} 
-                className="demo-slide-image"
-              />
-              <div className="demo-slide-text">
-                {currentText}
-              </div>
-              {currentSlide > 1 && (
-                <div className="story-arrow story-arrow-left" onClick={handleLeftArrowClick}>←</div>
-              )}
-              {currentSlide < 10 && (
-                <div className="story-arrow story-arrow-right" onClick={handleRightArrowClick}>→</div>
-              )}
-              {currentSlide === 10 ? (
-                <div className="star-button tick-button" onClick={handleTickClick}>✓</div>
-              ) : (
-                <div className="star-button" onClick={handleStarClick}>★</div>
-              )}
-            </>
-          )}
+          {renderContent()}
         </div>
       </div>
-      <div style={{ minHeight: choiceMade ? 'auto' : '60px', marginTop: '24px' }}>
-        {choiceMade && (
+      <div style={{ minHeight: '60px', marginTop: '24px' }}>
+        {story && (
           <button className="retry-button" onClick={handleRetry}>Try Again</button>
         )}
       </div>
