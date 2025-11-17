@@ -25,7 +25,7 @@ function Plans() {
     {
       name: 'PLUS',
       subtitle: 'For parents who want a tailored bedtime experience for their child.',
-      price: '£4.99',
+      price: '£5.99',
       features: [
         'Full story library access',
         'Enhanced co-creation (multiple decision points)',
@@ -40,7 +40,7 @@ function Plans() {
     {
       name: 'INFINITE',
       subtitle: 'For parents who want every night to feel uniquely crafted for their child.',
-      price: '£9.99',
+      price: '£11.99',
       features: [
         'Unlimited co-creation paths (branching stories with adaptive complexity)',
         'Personalized story worlds based on child\'s preferences (animals, space, fairies, etc.)',

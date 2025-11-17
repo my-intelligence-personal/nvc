@@ -3,25 +3,25 @@ import './Testimonials.css'
 // Customer testimonials - 4 total
 const testimonials = [
   {
-    name: 'Person 1',
+    name: 'Abir',
     parentOf: 'parent',
     image: '/assets/person 1.jpg',
     testimonial: 'What I find remarkable about Yume is that it does not simply remove technology, it transforms it.'
   },
   {
-    name: 'Person 2',
+    name: 'Arzu',
     parentOf: 'parent',
     image: '/assets/person 2.jpg',
     testimonial: 'By turning any device into a soothing, e-ink–like tool, Yume respects the child\'s natural sensory needs and supports their transition into sleep in a gentle, developmentally aligned way.'
   },
   {
-    name: 'Person 3',
+    name: 'Din',
     parentOf: 'parent',
     image: '/assets/person 3.jpg',
     testimonial: 'The calming colors, slow pace, and structured storytelling reduce sensory overload and create the kind of predictable routine that children need to feel safe and ready to rest.'
   },
   {
-    name: 'Person 4',
+    name: 'Narmin',
     parentOf: 'parent',
     image: '/assets/person 4.jpg',
     testimonial: 'This transforms bedtime from a passive screen habit into a mindful experience that strengthens the parent–child bond.'
